@@ -1,7 +1,7 @@
 import threading
 import time
 from ser import Ser
-import settings
+from utils import settings
 
 class Animal(Ser):
     

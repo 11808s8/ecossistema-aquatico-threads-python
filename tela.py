@@ -1,4 +1,4 @@
-import settings
+from utils import settings
 import threading
 import random
 import time

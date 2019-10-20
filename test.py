@@ -9,7 +9,7 @@ from peixe import Peixe
 import random
 # from threading import Semaphore
 from tela import Tela
-import settings
+from utils import settings
 
 pygame.init()
 pygame.display.set_caption('Ecossistema Aquático')
