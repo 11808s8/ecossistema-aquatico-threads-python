@@ -12,14 +12,14 @@ from tela import Tela
 import settings
 
 pygame.init()
+pygame.display.set_caption('Ecossistema Aquático')
 # semaforo = Semaphore()
 # print(settings.mundo)
 # Para o TEMPO
 
-FONT = pygame.font.SysFont("Arial", 20)
-TEXT_COLOR = (255, 255, 0)
+
 clock = pygame.time.Clock()
-start_time = pygame.time.get_ticks()
+
 # @TODO: Colocar um START_TIME para quando o USUÁRIO decidir iniciar o game
 
 
@@ -27,11 +27,29 @@ seres_objetos = []
 inputs = [0 for i in range(len(settings.seres))]
 textinputs = [pygame_textinput.TextInput("","",35,True,(255,255,0)) for i in range(len(inputs))]
 
-
+calorias_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
+screen = pygame.display.set_mode((settings.w, settings.h))
+calorias = 600
 # textinput.update(events)
 
-screen = pygame.display.set_mode((settings.w, settings.h))
 
+        
+        # Exibe a menssagem na tela
+while True:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            quit()
+    if(calorias_input.update(events)):
+            calorias = int(calorias_input.get_text())
+            calorias_input.clear_text()
+            break
+    screen.fill((0,0,0))
+    message = 'Digite quantas calorias você quer por animal na simulação:'
+    screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0,(settings.h/2)))
+    screen.blit(calorias_input.get_surface(),(settings.FONT.size(message)[0],(settings.h/2)))
+    pygame.display.flip()
+    clock.tick(100)
 # Lê entradas
 
 for i,textinput in enumerate(textinputs):
@@ -48,9 +66,9 @@ for i,textinput in enumerate(textinputs):
         message = 'Digite quantas %s você quer na simulação:'%(settings.seres[i])
         
         # Exibe a menssagem na tela
-        screen.blit(FONT.render(message, True, TEXT_COLOR), (0,(settings.h/2)))
+        screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0,(settings.h/2)))
         # Exibe input logo após a mensagem na tela
-        screen.blit(textinput.get_surface(),(FONT.size(message)[0],(settings.h/2)))
+        screen.blit(textinput.get_surface(),(settings.FONT.size(message)[0],(settings.h/2)))
         pygame.display.flip()
         clock.tick(100)
 
@@ -82,17 +100,18 @@ finalizou = False
 for chave,quantidade_seres in enumerate(inputs):
     print("Qtd animais " + str(quantidade_seres))
     for j in range(quantidade_seres):
-        (x, y) = settings.coloca_em_posicao_aleatoria(ids,settings.seres[chave])
+        # (x, y) = settings.coloca_em_posicao_aleatoria(ids,settings.seres[chave])
+        (x, y) = settings.coloca_em_posicao_aleatoria(None)
         if(settings.seres[chave] == 'alga'):
             novo_ser = Alga(ids,alga,alga.get_rect(),10,20,x,y)
-            
         elif(settings.seres[chave] == 'peixe'):
-            novo_ser = Peixe(ids,peixe,peixe.get_rect(),10,20,x,y)
+            novo_ser = Peixe(ids,peixe,peixe.get_rect(),10,20,x,y,calorias)
         elif(settings.seres[chave] == 'tubarao'):
-            novo_ser = Tubarao(ids,tubarao,tubarao.get_rect(),10,20,x,y)
+            novo_ser = Tubarao(ids,tubarao,tubarao.get_rect(),10,20,x,y,calorias)
         elif(settings.seres[chave] == 'foca'):
-            novo_ser = Foca(ids,foca,foca.get_rect(),10,20,x,y)
+            novo_ser = Foca(ids,foca,foca.get_rect(),10,20,x,y,calorias)
         # novo_ser.exibe(screen)
+        settings.coloca_em_posicao_especifica(novo_ser)
         seres_objetos.append(novo_ser)
         ids+=1
 # pygame.display.flip()
@@ -100,7 +119,9 @@ for chave,quantidade_seres in enumerate(inputs):
 # print(settings.mundo)
 # quit()
 
-tela = Tela(ids)
+start_time = pygame.time.get_ticks()
+
+tela = Tela(ids, screen, start_time)
 print(" ID TELA " + str(ids))
 print("Semaforo liberado: " + str((len(settings.semaforos)-1)))
 # settings.semaforos[(len(settings.semaforos)-1)].release()
@@ -114,12 +135,6 @@ tela.join()
 quit()
 
 # textinput = pygame_textinput.TextInput("","",35,True,(255,255,0))
-
-
-
-tamanho_matriz = 5
-tamanho_quadrado = (w-tamanho_bola)/tamanho_matriz
-altura_quadrado = (h-tamanho_bola)/tamanho_matriz
 
 # Matrizes de movimentação para UM objeto. Colocar isso em CADA objeto
 matriz_x = [tamanho_quadrado*i for i in range(tamanho_matriz)]

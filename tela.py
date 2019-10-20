@@ -7,9 +7,12 @@ import pygame
 
 class Tela(threading.Thread):
 
-    def __init__(self, id):
+
+    def __init__(self, id, screen, start_time):
         threading.Thread.__init__(self)
         self.id = id
+        self.screen = screen
+        self.start_time = start_time
 
     def run(self):
         # global finalizou
@@ -43,8 +46,23 @@ class Tela(threading.Thread):
         
             for i in range(settings.tamanho_matriz):
                 print(settings.mundo[i])
+            
+            self.__exibe_mundo__(self.screen)
+            
             print("Chama o próximo: " + str(proximo_semaforo))
             settings.semaforos[proximo_semaforo].release()
             time.sleep(1)
             
     
+    def __exibe_mundo__(self, screen):
+        screen.fill(settings.COR_MAR)
+        for x in range(settings.tamanho_matriz):
+            for y in range(settings.tamanho_matriz):
+                if(settings.mundo[x][y] != None):
+                    settings.mundo[x][y].exibe(screen)
+        
+        time_since_enter = (pygame.time.get_ticks() - self.start_time)/1000
+        message = 'Tempo transcorrido: ' + '%i'%(time_since_enter)
+        screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0, 0))
+        
+        pygame.display.flip()

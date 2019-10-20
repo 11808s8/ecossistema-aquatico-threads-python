@@ -1,5 +1,6 @@
 import random
 from threading import Semaphore
+import pygame
 
 tamanho_matriz = 5
 finalizou = False
@@ -12,6 +13,10 @@ h = 480
 
 semaforos = []
 
+FONT = pygame.font.SysFont("Arial", 20)
+TEXT_COLOR = (255, 255, 0)
+COR_MAR = (9, 150, 185)
+
 
 def inicializa_semaforos(quantos):
     global semaforos  
@@ -23,7 +28,8 @@ def posicao_tomada(x,y):
         return True
     return False
 
-def coloca_em_posicao_aleatoria(id_ser,tipo_ser):
+# def coloca_em_posicao_aleatoria(id_ser,tipo_ser):
+def coloca_em_posicao_aleatoria(ser):
     global mundo
     colocou = False
     x = -1
@@ -32,7 +38,9 @@ def coloca_em_posicao_aleatoria(id_ser,tipo_ser):
         x = random.randint(0,(tamanho_matriz-1))
         y = random.randint(0,(tamanho_matriz-1))
         if(not posicao_tomada(x,y)):
-            mundo[x][y] = {'id':id_ser, 'tipo_ser':tipo_ser}
+            # mundo[x][y] = {'id':id_ser, 'tipo_ser':tipo_ser}
+            if(ser != None):
+                mundo[x][y] = ser
             colocou = True
     return (x,y)
 
@@ -42,7 +50,8 @@ def limpa_posicao_especifica(x,y):
 
 def coloca_em_posicao_especifica(animal):
     global mundo
-    mundo[animal.x][animal.y] = { 'id': animal.id, 'tipo_ser':animal.o_que_sou()}
+    # mundo[animal.x][animal.y] = { 'id': animal.id, 'tipo_ser':animal.o_que_sou()}
+    mundo[animal.x][animal.y] = animal
 
 def ser_existe_no_mundo(ser):
     print("====1")
@@ -51,7 +60,8 @@ def ser_existe_no_mundo(ser):
     print(mundo[ser.x][ser.y])
     if(mundo[ser.x][ser.y] == None):
         return False
-    elif(mundo[ser.x][ser.y]['id'] == ser.id):
+    # elif(mundo[ser.x][ser.y]['id'] == ser.id):
+    elif(mundo[ser.x][ser.y].id == ser.id):
         return True
     return False
 
@@ -61,7 +71,8 @@ def verifica_se_id_ser_existe_no_mundo(id):
     for x in range(tamanho_matriz):
         for y in range(tamanho_matriz):
             if(mundo[x][y]!=None):
-                if(mundo[x][y]["id"]==id):
+                # if(mundo[x][y]["id"]==id):
+                if(mundo[x][y].id==id):
                     return True
     return False
 
@@ -77,7 +88,8 @@ def retorna_movimento_valido(animal):
             print(" X :" + str(x) + " Y : " + str(y))
             if(mundo[x][y]==None):
                 valido = True
-            elif(mundo[x][y]['tipo_ser'] in animal.O_QUE_COMO):
+            # elif(mundo[x][y]['tipo_ser'] in animal.O_QUE_COMO):
+            elif(mundo[x][y].o_que_sou() in animal.O_QUE_COMO):
                 valido= True
     
     return direcao
