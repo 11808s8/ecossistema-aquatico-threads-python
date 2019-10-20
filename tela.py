@@ -32,12 +32,7 @@ class Tela(threading.Thread):
                         print("liberando " + str(i))
                         settings.semaforos[i].release()
                     break
-            if(settings.mundo_vazio()):
-                settings.finalizou = True
-                for i in range(len(settings.semaforos)):
-                    print("liberando " + str(i))
-                    settings.semaforos[i].release()
-                    break
+            
 
             proximo_semaforo = random.randint(0,(len(settings.semaforos)-2))
             while(not settings.verifica_se_id_ser_existe_no_mundo(proximo_semaforo)):
@@ -47,7 +42,17 @@ class Tela(threading.Thread):
             for i in range(settings.tamanho_matriz):
                 print(settings.mundo[i])
             
+            
+            settings.decrementa_calorias()
+            settings.limpa_mortos_de_fome()
             self.__exibe_mundo__(self.screen)
+            
+            if(settings.mundo_vazio() or settings.apenas_algas()):
+                settings.finalizou = True
+                for i in range(len(settings.semaforos)):
+                    print("liberando " + str(i))
+                    settings.semaforos[i].release()
+                break
             
             print("Chama o próximo: " + str(proximo_semaforo))
             settings.semaforos[proximo_semaforo].release()

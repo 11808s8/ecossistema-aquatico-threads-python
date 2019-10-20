@@ -102,8 +102,37 @@ def mundo_vazio():
                 return False
     return True
 
+#@TODO: Quebrar essas 3 funções abaixo em uma ITERA RETORNO que recebe um CALLBACK e devolve o retorno
+def apenas_algas():
+    global mundo
+    for x in range(tamanho_matriz):
+        for y in range(tamanho_matriz):
+            if(mundo[x][y] != None):
+                if(mundo[x][y].o_que_sou() != 'alga'):
+                    return False
+    return True
+
+def decrementa_calorias():
+    global mundo
+    for x in range(tamanho_matriz):
+        for y in range(tamanho_matriz):
+            if(mundo[x][y] != None):
+                if(mundo[x][y].o_que_sou() != 'alga'):
+                    mundo[x][y].sente_fome()
+
+def limpa_mortos_de_fome():
+    for x in range(tamanho_matriz):
+        for y in range(tamanho_matriz):
+            if(mundo[x][y] != None):
+                if(mundo[x][y].o_que_sou() != 'alga'):
+                    if(mundo[x][y].morreu_de_fome()):
+                        limpa_posicao_especifica(x,y)
+                        # semaforos[(len(semaforos)-1)].release()
+                        # break
+
 def movimento_aleatorio():
     return random.choice(direcoes)
+
 
 '''
     Verificação de validade de movimento

@@ -33,12 +33,9 @@ class Animal(Ser):
                 # if(settings.mundo[x][y]['tipo_ser'] in self.O_QUE_COMO):
                 if(settings.mundo[x][y].o_que_sou() in self.O_QUE_COMO):
                     self.se_alimentou()
-            else:
-                self.sente_fome()
-            if(self.morreu_de_fome()):
-                settings.limpa_posicao_especifica(self.x,self.y)
-                settings.semaforos[(len(settings.semaforos)-1)].release()
-                break
+            # else:
+            #     self.sente_fome()
+            
             x_antigo = self.x
             y_antigo = self.y 
             self.movimenta(direcao)

@@ -127,6 +127,7 @@ print("Semaforo liberado: " + str((len(settings.semaforos)-1)))
 # settings.semaforos[(len(settings.semaforos)-1)].release()
 for ser in seres_objetos:
     ser.start()
+print(seres_objetos)
 tela.start()
 for ser in seres_objetos:
     ser.join()
