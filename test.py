@@ -1,4 +1,4 @@
-import pygame_textinput
+from libs import pygame_textinput
 import pygame
 import time
 from random import randrange
