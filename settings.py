@@ -65,6 +65,12 @@ def ser_existe_no_mundo(ser):
         return True
     return False
 
+def verifica_existencia_e_validade_movimentos_id(id):
+    animal = verifica_se_id_ser_existe_no_mundo(id)
+    if(animal!=None):
+        if(animal.o_que_sou() != 'alga' and retorna_movimento_valido(animal)!=None):
+            return True
+    return False
 
 def verifica_se_id_ser_existe_no_mundo(id):
     
@@ -73,8 +79,9 @@ def verifica_se_id_ser_existe_no_mundo(id):
             if(mundo[x][y]!=None):
                 # if(mundo[x][y]["id"]==id):
                 if(mundo[x][y].id==id):
-                    return True
-    return False
+                    return mundo[x][y]
+    return None
+
 
 def retorna_movimento_valido(animal):
     

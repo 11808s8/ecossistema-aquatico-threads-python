@@ -35,7 +35,7 @@ class Tela(threading.Thread):
             
 
             proximo_semaforo = random.randint(0,(len(settings.semaforos)-2))
-            while(not settings.verifica_se_id_ser_existe_no_mundo(proximo_semaforo)):
+            while(not settings.verifica_existencia_e_validade_movimentos_id(proximo_semaforo)):
                 proximo_semaforo = random.randint(0,(len(settings.semaforos)-2))
         
         
