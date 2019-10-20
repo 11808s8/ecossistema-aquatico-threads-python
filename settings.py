@@ -17,6 +17,11 @@ FONT = pygame.font.SysFont("Arial", 20)
 TEXT_COLOR = (255, 255, 0)
 COR_MAR = (9, 150, 185)
 
+ASSETS = './assets/'
+
+def carrega_sprite(nome_arquivo_com_extensao):
+    caminho = ASSETS + nome_arquivo_com_extensao
+    return pygame.image.load(caminho)
 
 def inicializa_semaforos(quantos):
     global semaforos  

@@ -73,11 +73,11 @@ for i,textinput in enumerate(textinputs):
         clock.tick(100)
 
 
-bola = pygame.image.load('bola.png')
-alga = pygame.image.load('alga.png')
-tubarao = pygame.image.load('tubarao.png')
-peixe = pygame.image.load('peixe.png')
-foca = pygame.image.load('foca.png')
+bola = settings.carrega_sprite('bola.png')
+alga = settings.carrega_sprite('alga.png')
+tubarao = settings.carrega_sprite('tubarao.png')
+peixe = settings.carrega_sprite('peixe.png')
+foca = settings.carrega_sprite('foca.png')
 
 tamanho_bola = 100
 alga = pygame.transform.scale(alga,(tamanho_bola,tamanho_bola))
