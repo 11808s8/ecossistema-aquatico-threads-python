@@ -70,6 +70,16 @@ def ser_existe_no_mundo(ser):
         return True
     return False
 
+def contador_seres_no_mundo():
+    contador = 0
+    
+    for x in range(tamanho_matriz):
+        for y in range(tamanho_matriz):
+            if(mundo[x][y] != None):
+                contador+=1
+
+    return contador
+    
 def verifica_existencia_e_validade_movimentos_id(id):
     animal = verifica_se_id_ser_existe_no_mundo(id)
     if(animal!=None):

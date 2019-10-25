@@ -66,8 +66,14 @@ class Tela(threading.Thread):
                 if(settings.mundo[x][y] != None):
                     settings.mundo[x][y].exibe(screen)
         
+        seres_na_tela = settings.contador_seres_no_mundo()
+
         time_since_enter = (pygame.time.get_ticks() - self.start_time)/1000
         message = 'Tempo transcorrido: ' + '%i'%(time_since_enter)
         screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0, 0))
+        
+        message = 'Seres no mundo: %i'%(seres_na_tela)
+        message_seres = settings.FONT.render(message, True, settings.TEXT_COLOR)
+        screen.blit(message_seres, ((settings.w-message_seres.get_width()), 0))
         
         pygame.display.flip()
