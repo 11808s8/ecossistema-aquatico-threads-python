@@ -6,7 +6,11 @@ import pygame
 
 
 class Tela(threading.Thread):
-
+    """Classe que define as funcionalidades da tela da simulação.
+       Funciona como extensão do módulo de threading do Python3,
+       Implementando um sistema de semáforos.
+       (tem seu semáforo específico na lista de semáforos da aplicação)
+    """
 
     def __init__(self, id, screen, start_time):
         threading.Thread.__init__(self)
@@ -20,9 +24,8 @@ class Tela(threading.Thread):
         # global finalizou
         while not settings.finalizou:
             settings.semaforos[self.id].acquire()
-            # if(self.finalizou):
-            #     break
-            print('Tela liberada!' + str(self.id))
+            
+            # print('Tela liberada!' + str(self.id))
             
             events = pygame.event.get()
             for event in events:
@@ -31,7 +34,7 @@ class Tela(threading.Thread):
 
                     # libera todos os locks
                     for i in range(len(settings.semaforos)):
-                        print("liberando " + str(i))
+                        # print("liberando " + str(i))
                         settings.semaforos[i].release()
                     break
             
@@ -52,11 +55,10 @@ class Tela(threading.Thread):
             if(settings.mundo_vazio() or settings.apenas_algas()):
                 settings.finalizou = True
                 for i in range(len(settings.semaforos)):
-                    print("liberando " + str(i))
                     settings.semaforos[i].release()
                 break
             
-            print("Chama o próximo: " + str(proximo_semaforo))
+            # print("Chama o próximo: " + str(proximo_semaforo))
             settings.semaforos[proximo_semaforo].release()
             # time.sleep(1)
             
