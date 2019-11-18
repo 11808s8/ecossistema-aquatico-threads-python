@@ -33,8 +33,10 @@ def posicao_tomada(x,y):
         return True
     return False
 
-# def coloca_em_posicao_aleatoria(id_ser,tipo_ser):
+
 def coloca_em_posicao_aleatoria(ser):
+    """ Retorna tupla com inteiros (x,y) do array do mundo
+    """
     global mundo
     colocou = False
     x = -1
@@ -43,7 +45,6 @@ def coloca_em_posicao_aleatoria(ser):
         x = random.randint(0,(tamanho_matriz-1))
         y = random.randint(0,(tamanho_matriz-1))
         if(not posicao_tomada(x,y)):
-            # mundo[x][y] = {'id':id_ser, 'tipo_ser':tipo_ser}
             if(ser != None):
                 mundo[x][y] = ser
             colocou = True
@@ -55,17 +56,11 @@ def limpa_posicao_especifica(x,y):
 
 def coloca_em_posicao_especifica(animal):
     global mundo
-    # mundo[animal.x][animal.y] = { 'id': animal.id, 'tipo_ser':animal.o_que_sou()}
     mundo[animal.x][animal.y] = animal
 
 def ser_existe_no_mundo(ser):
-    print("====1")
-    print(ser)
-    print("====2")
-    print(mundo[ser.x][ser.y])
     if(mundo[ser.x][ser.y] == None):
         return False
-    # elif(mundo[ser.x][ser.y]['id'] == ser.id):
     elif(mundo[ser.x][ser.y].id == ser.id):
         return True
     return False
@@ -92,7 +87,6 @@ def verifica_se_id_ser_existe_no_mundo(id):
     for x in range(tamanho_matriz):
         for y in range(tamanho_matriz):
             if(mundo[x][y]!=None):
-                # if(mundo[x][y]["id"]==id):
                 if(mundo[x][y].id==id):
                     return mundo[x][y]
     return None
@@ -110,10 +104,10 @@ def retorna_movimento_valido(animal):
         
         if(verifica_validade_movimento(animal, tamanho_matriz, direcao)):
             (x,y) = retorna_coordenada_baseado_em_movimento(animal.x,animal.y,direcao)
-            print(" X :" + str(x) + " Y : " + str(y))
+            
             if(mundo[x][y]==None):
                 valido = True
-            # elif(mundo[x][y]['tipo_ser'] in animal.O_QUE_COMO):
+                
             elif(mundo[x][y].o_que_sou() in animal.O_QUE_COMO):
                 valido= True
 
