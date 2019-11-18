@@ -64,7 +64,7 @@ for i,textinput in enumerate(textinputs):
             textinput.clear_text()
             break
         screen.fill((0,0,0))
-        message = 'Digite quantas %s você quer na simulação:'%(utils.seres[i])
+        message = 'Número de %s para a execução da simulação:'%(utils.seres_plural[i])
         
         # Exibe a menssagem na tela
         screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (0,(utils.h/2)))
@@ -85,12 +85,12 @@ foca = utils.carrega_sprite('foca.png')
 peixe = utils.carrega_sprite('peixe_32_32.png')
 # foca = utils.carrega_sprite('peixe_32_32.png')
 
-tamanho_sprite = 100
-alga = pygame.transform.scale(alga,(tamanho_sprite,tamanho_sprite))
-tubarao = pygame.transform.scale(tubarao,(tamanho_sprite,tamanho_sprite))
-peixe = pygame.transform.scale(peixe,(tamanho_sprite,tamanho_sprite))
-foca = pygame.transform.scale(foca,(tamanho_sprite,tamanho_sprite))
-bola = pygame.transform.scale(bola,(tamanho_sprite,tamanho_sprite))
+
+alga = pygame.transform.scale(alga,(utils.tamanho_sprite,utils.tamanho_sprite))
+tubarao = pygame.transform.scale(tubarao,(utils.tamanho_sprite,utils.tamanho_sprite))
+peixe = pygame.transform.scale(peixe,(utils.tamanho_sprite,utils.tamanho_sprite))
+foca = pygame.transform.scale(foca,(utils.tamanho_sprite,utils.tamanho_sprite))
+bola = pygame.transform.scale(bola,(utils.tamanho_sprite,utils.tamanho_sprite))
 
 total_seres = 0
 for quantidade_seres in inputs:

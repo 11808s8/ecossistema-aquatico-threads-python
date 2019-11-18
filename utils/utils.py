@@ -6,7 +6,10 @@ tamanho_matriz = 5
 finalizou = False
 mundo = [[None]*tamanho_matriz for i in range(tamanho_matriz)]
 seres = ['alga','tubarao','foca','peixe']
+seres_plural = ['algas','tubarões','focas','peixes']
 direcoes = ['cima', 'baixo', 'esquerda', 'direita']
+
+tamanho_sprite = 100
 
 w = 640
 h = 480
