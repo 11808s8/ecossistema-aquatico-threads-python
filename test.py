@@ -76,15 +76,20 @@ for i,textinput in enumerate(textinputs):
 bola = settings.carrega_sprite('bola.png')
 alga = settings.carrega_sprite('alga.png')
 tubarao = settings.carrega_sprite('tubarao.png')
-peixe = settings.carrega_sprite('peixe.png')
+# peixe = settings.carrega_sprite('peixe.png')
 foca = settings.carrega_sprite('foca.png')
+# bola = settings.carrega_sprite('peixe_32_32.png')
+# alga = settings.carrega_sprite('peixe_32_32.png')
+# tubarao = settings.carrega_sprite('peixe_32_32.png')
+peixe = settings.carrega_sprite('peixe_32_32.png')
+# foca = settings.carrega_sprite('peixe_32_32.png')
 
-tamanho_bola = 100
-alga = pygame.transform.scale(alga,(tamanho_bola,tamanho_bola))
-tubarao = pygame.transform.scale(tubarao,(tamanho_bola,tamanho_bola))
-peixe = pygame.transform.scale(peixe,(tamanho_bola,tamanho_bola))
-foca = pygame.transform.scale(foca,(tamanho_bola,tamanho_bola))
-bola = pygame.transform.scale(bola,(tamanho_bola,tamanho_bola))
+tamanho_sprite = 100
+alga = pygame.transform.scale(alga,(tamanho_sprite,tamanho_sprite))
+tubarao = pygame.transform.scale(tubarao,(tamanho_sprite,tamanho_sprite))
+peixe = pygame.transform.scale(peixe,(tamanho_sprite,tamanho_sprite))
+foca = pygame.transform.scale(foca,(tamanho_sprite,tamanho_sprite))
+bola = pygame.transform.scale(bola,(tamanho_sprite,tamanho_sprite))
 
 total_seres = 0
 for quantidade_seres in inputs:
