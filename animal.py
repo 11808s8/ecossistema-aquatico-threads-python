@@ -1,7 +1,7 @@
 import threading
 import time
 from ser import Ser
-from utils import settings
+from utils import utils
 
 class Animal(Ser):
     
@@ -14,24 +14,24 @@ class Animal(Ser):
 
 
     def run(self):
-        while(not settings.finalizou):
-            settings.semaforos[self.id].acquire()
-            print("finalizou " + str(self.id) + " Status: " + str(settings.finalizou))
+        while(not utils.finalizou):
+            utils.semaforos[self.id].acquire()
+            print("finalizou " + str(self.id) + " Status: " + str(utils.finalizou))
 
             # @TODO: falta verificar se morri de fome e decrementar fome
-            if(settings.finalizou):
+            if(utils.finalizou):
                 print("finalizou " + str(self.id))
                 break
 
-            if(not settings.ser_existe_no_mundo(self)):
-                settings.semaforos[(len(settings.semaforos)-1)].release()
+            if(not utils.ser_existe_no_mundo(self)):
+                utils.semaforos[(len(utils.semaforos)-1)].release()
                 break
         
-            direcao = settings.retorna_movimento_valido(self)
-            (x,y) = settings.retorna_coordenada_baseado_em_movimento(self.x,self.y,direcao)
-            if(settings.mundo[x][y] != None):
-                # if(settings.mundo[x][y]['tipo_ser'] in self.O_QUE_COMO):
-                if(settings.mundo[x][y].o_que_sou() in self.O_QUE_COMO):
+            direcao = utils.retorna_movimento_valido(self)
+            (x,y) = utils.retorna_coordenada_baseado_em_movimento(self.x,self.y,direcao)
+            if(utils.mundo[x][y] != None):
+                # if(utils.mundo[x][y]['tipo_ser'] in self.O_QUE_COMO):
+                if(utils.mundo[x][y].o_que_sou() in self.O_QUE_COMO):
                     self.se_alimentou()
             # else:
             #     self.sente_fome()
@@ -39,11 +39,11 @@ class Animal(Ser):
             x_antigo = self.x
             y_antigo = self.y 
             self.movimenta(direcao)
-            settings.coloca_em_posicao_especifica(self)
-            settings.limpa_posicao_especifica(x_antigo, y_antigo)
+            utils.coloca_em_posicao_especifica(self)
+            utils.limpa_posicao_especifica(x_antigo, y_antigo)
 
             print(type(self).__name__ + " " + str(self.id) + " X " + str(self.x) + " Y " + str(self.y))
-            settings.semaforos[(len(settings.semaforos)-1)].release()
+            utils.semaforos[(len(utils.semaforos)-1)].release()
             time.sleep(1)        
 
     def __str__(self):
@@ -89,6 +89,6 @@ class Animal(Ser):
     def exibe(self, screen):
         super().exibe(screen)
         message = 'Calorias: ' + '%i'%(self.calorias)
-        # screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (self.matriz_x[self.x], self.matriz_y[self.y]+self.tamanho_quadrado/2))
-        screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (self.matriz_x[self.x], self.matriz_y[self.y]-20))
+        # screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (self.matriz_x[self.x], self.matriz_y[self.y]+self.tamanho_quadrado/2))
+        screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (self.matriz_x[self.x], self.matriz_y[self.y]-20))
         # screen.blit(self.imagem,(, ))

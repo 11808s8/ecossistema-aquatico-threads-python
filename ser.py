@@ -1,4 +1,4 @@
-from utils import settings
+from utils import utils
 import threading
 import time
 
@@ -14,10 +14,10 @@ class Ser(threading.Thread):
         self.y = y
         self.id = id
         # self.semaforos = semaforos
-        self.tamanho_quadrado = (settings.w-self.largura_imagem)/settings.tamanho_matriz 
-        self.altura_quadrado = (settings.h-self.altura_imagem)/settings.tamanho_matriz 
-        self.matriz_x = [self.tamanho_quadrado*i for i in range(settings.tamanho_matriz)]
-        self.matriz_y = [self.altura_quadrado*i for i in range(settings.tamanho_matriz)]
+        self.tamanho_quadrado = (utils.w-self.largura_imagem)/utils.tamanho_matriz 
+        self.altura_quadrado = (utils.h-self.altura_imagem)/utils.tamanho_matriz 
+        self.matriz_x = [self.tamanho_quadrado*i for i in range(utils.tamanho_matriz)]
+        self.matriz_y = [self.altura_quadrado*i for i in range(utils.tamanho_matriz)]
 
 # Matrizes de movimentação para UM objeto. Colocar isso em CADA objeto
 

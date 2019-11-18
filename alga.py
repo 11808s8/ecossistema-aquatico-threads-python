@@ -1,26 +1,26 @@
 import threading
 import time
 from ser import Ser
-from utils import settings
+from utils import utils
 
 class Alga(Ser):
 
 
 
     def run(self):
-        while(not settings.finalizou):
+        while(not utils.finalizou):
             
-            settings.semaforos[self.id].acquire()
+            utils.semaforos[self.id].acquire()
             # print("Meu id: " )
-            # print("finalizou " + str(self.id) + " Status: " + str(settings.finalizou))
-            if(settings.finalizou):
+            # print("finalizou " + str(self.id) + " Status: " + str(utils.finalizou))
+            if(utils.finalizou):
                 print("finalizou " + str(self.id))
                 break
-            if(not settings.ser_existe_no_mundo(self)):
-                settings.semaforos[(len(settings.semaforos)-1)].release()
+            if(not utils.ser_existe_no_mundo(self)):
+                utils.semaforos[(len(utils.semaforos)-1)].release()
                 break
             print(type(self).__name__ + " " + str(self.id))
-            settings.semaforos[(len(settings.semaforos)-1)].release()
+            utils.semaforos[(len(utils.semaforos)-1)].release()
             time.sleep(1)
 
     def __str__(self):

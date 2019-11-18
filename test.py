@@ -9,12 +9,12 @@ from peixe import Peixe
 import random
 # from threading import Semaphore
 from tela import Tela
-from utils import settings
+from utils import utils
 
 pygame.init()
 pygame.display.set_caption('Ecossistema Aquático')
 # semaforo = Semaphore()
-# print(settings.mundo)
+# print(utils.mundo)
 # Para o TEMPO
 
 
@@ -24,11 +24,11 @@ clock = pygame.time.Clock()
 
 
 seres_objetos = []
-inputs = [0 for i in range(len(settings.seres))]
+inputs = [0 for i in range(len(utils.seres))]
 textinputs = [pygame_textinput.TextInput("","",35,True,(255,255,0)) for i in range(len(inputs))]
 
 calorias_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
-screen = pygame.display.set_mode((settings.w, settings.h))
+screen = pygame.display.set_mode((utils.w, utils.h))
 calorias = 600
 # textinput.update(events)
 
@@ -46,8 +46,8 @@ while True:
             break
     screen.fill((0,0,0))
     message = 'Digite quantas calorias você quer por animal na simulação:'
-    screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0,(settings.h/2)))
-    screen.blit(calorias_input.get_surface(),(settings.FONT.size(message)[0],(settings.h/2)))
+    screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (0,(utils.h/2)))
+    screen.blit(calorias_input.get_surface(),(utils.FONT.size(message)[0],(utils.h/2)))
     pygame.display.flip()
     clock.tick(100)
 # Lê entradas
@@ -63,26 +63,26 @@ for i,textinput in enumerate(textinputs):
             textinput.clear_text()
             break
         screen.fill((0,0,0))
-        message = 'Digite quantas %s você quer na simulação:'%(settings.seres[i])
+        message = 'Digite quantas %s você quer na simulação:'%(utils.seres[i])
         
         # Exibe a menssagem na tela
-        screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0,(settings.h/2)))
+        screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (0,(utils.h/2)))
         # Exibe input logo após a mensagem na tela
-        screen.blit(textinput.get_surface(),(settings.FONT.size(message)[0],(settings.h/2)))
+        screen.blit(textinput.get_surface(),(utils.FONT.size(message)[0],(utils.h/2)))
         pygame.display.flip()
         clock.tick(100)
 
 
-bola = settings.carrega_sprite('bola.png')
-alga = settings.carrega_sprite('alga.png')
-tubarao = settings.carrega_sprite('tubarao.png')
-# peixe = settings.carrega_sprite('peixe.png')
-foca = settings.carrega_sprite('foca.png')
-# bola = settings.carrega_sprite('peixe_32_32.png')
-# alga = settings.carrega_sprite('peixe_32_32.png')
-# tubarao = settings.carrega_sprite('peixe_32_32.png')
-peixe = settings.carrega_sprite('peixe_32_32.png')
-# foca = settings.carrega_sprite('peixe_32_32.png')
+bola = utils.carrega_sprite('bola.png')
+alga = utils.carrega_sprite('alga.png')
+tubarao = utils.carrega_sprite('tubarao.png')
+# peixe = utils.carrega_sprite('peixe.png')
+foca = utils.carrega_sprite('foca.png')
+# bola = utils.carrega_sprite('peixe_32_32.png')
+# alga = utils.carrega_sprite('peixe_32_32.png')
+# tubarao = utils.carrega_sprite('peixe_32_32.png')
+peixe = utils.carrega_sprite('peixe_32_32.png')
+# foca = utils.carrega_sprite('peixe_32_32.png')
 
 tamanho_sprite = 100
 alga = pygame.transform.scale(alga,(tamanho_sprite,tamanho_sprite))
@@ -96,8 +96,8 @@ for quantidade_seres in inputs:
     for j in range(quantidade_seres):
         total_seres+=1
 
-settings.inicializa_semaforos(total_seres)
-print(settings.semaforos)
+utils.inicializa_semaforos(total_seres)
+print(utils.semaforos)
 # quit()
 # print(seres)
 ids=0
@@ -105,31 +105,31 @@ finalizou = False
 for chave,quantidade_seres in enumerate(inputs):
     print("Qtd animais " + str(quantidade_seres))
     for j in range(quantidade_seres):
-        # (x, y) = settings.coloca_em_posicao_aleatoria(ids,settings.seres[chave])
-        (x, y) = settings.coloca_em_posicao_aleatoria(None)
-        if(settings.seres[chave] == 'alga'):
+        # (x, y) = utils.coloca_em_posicao_aleatoria(ids,utils.seres[chave])
+        (x, y) = utils.coloca_em_posicao_aleatoria(None)
+        if(utils.seres[chave] == 'alga'):
             novo_ser = Alga(ids,alga,alga.get_rect(),10,20,x,y)
-        elif(settings.seres[chave] == 'peixe'):
+        elif(utils.seres[chave] == 'peixe'):
             novo_ser = Peixe(ids,peixe,peixe.get_rect(),10,20,x,y,calorias)
-        elif(settings.seres[chave] == 'tubarao'):
+        elif(utils.seres[chave] == 'tubarao'):
             novo_ser = Tubarao(ids,tubarao,tubarao.get_rect(),10,20,x,y,calorias)
-        elif(settings.seres[chave] == 'foca'):
+        elif(utils.seres[chave] == 'foca'):
             novo_ser = Foca(ids,foca,foca.get_rect(),10,20,x,y,calorias)
         # novo_ser.exibe(screen)
-        settings.coloca_em_posicao_especifica(novo_ser)
+        utils.coloca_em_posicao_especifica(novo_ser)
         seres_objetos.append(novo_ser)
         ids+=1
 # pygame.display.flip()
 # input()
-# print(settings.mundo)
+# print(utils.mundo)
 # quit()
 
 start_time = pygame.time.get_ticks()
 
 tela = Tela(ids, screen, start_time)
 print(" ID TELA " + str(ids))
-print("Semaforo liberado: " + str((len(settings.semaforos)-1)))
-# settings.semaforos[(len(settings.semaforos)-1)].release()
+print("Semaforo liberado: " + str((len(utils.semaforos)-1)))
+# utils.semaforos[(len(utils.semaforos)-1)].release()
 for ser in seres_objetos:
     ser.start()
 print(seres_objetos)

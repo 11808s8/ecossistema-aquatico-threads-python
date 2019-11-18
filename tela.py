@@ -1,4 +1,4 @@
-from utils import settings
+from utils import utils
 import threading
 import random
 import time
@@ -22,65 +22,65 @@ class Tela(threading.Thread):
 
     def run(self):
         # global finalizou
-        while not settings.finalizou:
-            settings.semaforos[self.id].acquire()
+        while not utils.finalizou:
+            utils.semaforos[self.id].acquire()
             
             # print('Tela liberada!' + str(self.id))
             
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.QUIT:
-                    settings.finalizou = True 
+                    utils.finalizou = True 
 
                     # libera todos os locks
-                    for i in range(len(settings.semaforos)):
+                    for i in range(len(utils.semaforos)):
                         # print("liberando " + str(i))
-                        settings.semaforos[i].release()
+                        utils.semaforos[i].release()
                     break
             
 
-            proximo_semaforo = random.randint(0,(len(settings.semaforos)-2))
-            while(not settings.verifica_existencia_e_validade_movimentos_id(proximo_semaforo)):
-                proximo_semaforo = random.randint(0,(len(settings.semaforos)-2))
+            proximo_semaforo = random.randint(0,(len(utils.semaforos)-2))
+            while(not utils.verifica_existencia_e_validade_movimentos_id(proximo_semaforo)):
+                proximo_semaforo = random.randint(0,(len(utils.semaforos)-2))
         
         
-            for i in range(settings.tamanho_matriz):
-                print(settings.mundo[i])
+            for i in range(utils.tamanho_matriz):
+                print(utils.mundo[i])
             
             
-            settings.decrementa_calorias(int(self.time_since_enter), int(self.time_since_enter_backup))
-            settings.limpa_mortos_de_fome()
+            utils.decrementa_calorias(int(self.time_since_enter), int(self.time_since_enter_backup))
+            utils.limpa_mortos_de_fome()
             self.__exibe_mundo__(self.screen)
             
-            if(settings.mundo_vazio() or settings.apenas_algas()):
-                settings.finalizou = True
-                for i in range(len(settings.semaforos)):
-                    settings.semaforos[i].release()
+            if(utils.mundo_vazio() or utils.apenas_algas()):
+                utils.finalizou = True
+                for i in range(len(utils.semaforos)):
+                    utils.semaforos[i].release()
                 break
             
             # print("Chama o próximo: " + str(proximo_semaforo))
-            settings.semaforos[proximo_semaforo].release()
+            utils.semaforos[proximo_semaforo].release()
             # time.sleep(1)
             
     
     def __exibe_mundo__(self, screen):
-        screen.fill(settings.COR_MAR)
-        for x in range(settings.tamanho_matriz):
-            for y in range(settings.tamanho_matriz):
-                if(settings.mundo[x][y] != None):
-                    settings.mundo[x][y].exibe(screen)
+        screen.fill(utils.COR_MAR)
+        for x in range(utils.tamanho_matriz):
+            for y in range(utils.tamanho_matriz):
+                if(utils.mundo[x][y] != None):
+                    utils.mundo[x][y].exibe(screen)
         
-        seres_na_tela = settings.contador_seres_no_mundo()
+        seres_na_tela = utils.contador_seres_no_mundo()
 
         self.time_since_enter_backup = self.time_since_enter
 
         self.time_since_enter = self.__tempo_desde_start_no_jogo__()
         message = 'Tempo transcorrido: ' + '%i'%(self.time_since_enter)
-        screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0, 0))
+        screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (0, 0))
         
         message = 'Seres no mundo: %i'%(seres_na_tela)
-        message_seres = settings.FONT.render(message, True, settings.TEXT_COLOR)
-        screen.blit(message_seres, ((settings.w-message_seres.get_width()), 0))
+        message_seres = utils.FONT.render(message, True, utils.TEXT_COLOR)
+        screen.blit(message_seres, ((utils.w-message_seres.get_width()), 0))
         
         pygame.display.flip()
     
