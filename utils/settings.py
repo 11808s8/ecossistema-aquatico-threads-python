@@ -102,9 +102,12 @@ def retorna_movimento_valido(animal):
     
     valido = False
     direcao = None
-    
+    direcoes_ja_foi = []
     while(not valido):
         direcao = movimento_aleatorio()
+        if(direcao not in direcoes_ja_foi):
+            direcoes_ja_foi.append(direcao)
+        
         if(verifica_validade_movimento(animal, tamanho_matriz, direcao)):
             (x,y) = retorna_coordenada_baseado_em_movimento(animal.x,animal.y,direcao)
             print(" X :" + str(x) + " Y : " + str(y))
@@ -113,6 +116,9 @@ def retorna_movimento_valido(animal):
             # elif(mundo[x][y]['tipo_ser'] in animal.O_QUE_COMO):
             elif(mundo[x][y].o_que_sou() in animal.O_QUE_COMO):
                 valido= True
+
+        if((len(direcoes_ja_foi)==len(direcoes)) and not valido):
+            return None
     
     return direcao
 
@@ -134,8 +140,9 @@ def apenas_algas():
                     return False
     return True
 
-def decrementa_calorias():
+def decrementa_calorias(tempo_atual, tempo_antigo):
     global mundo
+    # if((tempo_atual-tempo_antigo)>=1):
     for x in range(tamanho_matriz):
         for y in range(tamanho_matriz):
             if(mundo[x][y] != None):

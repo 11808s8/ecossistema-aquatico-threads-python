@@ -13,6 +13,8 @@ class Tela(threading.Thread):
         self.id = id
         self.screen = screen
         self.start_time = start_time
+        self.time_since_enter_backup = self.start_time
+        self.time_since_enter = self.start_time
 
     def run(self):
         # global finalizou
@@ -43,7 +45,7 @@ class Tela(threading.Thread):
                 print(settings.mundo[i])
             
             
-            settings.decrementa_calorias()
+            settings.decrementa_calorias(int(self.time_since_enter), int(self.time_since_enter_backup))
             settings.limpa_mortos_de_fome()
             self.__exibe_mundo__(self.screen)
             
@@ -56,7 +58,7 @@ class Tela(threading.Thread):
             
             print("Chama o próximo: " + str(proximo_semaforo))
             settings.semaforos[proximo_semaforo].release()
-            time.sleep(1)
+            # time.sleep(1)
             
     
     def __exibe_mundo__(self, screen):
@@ -68,8 +70,10 @@ class Tela(threading.Thread):
         
         seres_na_tela = settings.contador_seres_no_mundo()
 
-        time_since_enter = (pygame.time.get_ticks() - self.start_time)/1000
-        message = 'Tempo transcorrido: ' + '%i'%(time_since_enter)
+        self.time_since_enter_backup = self.time_since_enter
+
+        self.time_since_enter = self.__tempo_desde_start_no_jogo__()
+        message = 'Tempo transcorrido: ' + '%i'%(self.time_since_enter)
         screen.blit(settings.FONT.render(message, True, settings.TEXT_COLOR), (0, 0))
         
         message = 'Seres no mundo: %i'%(seres_na_tela)
@@ -77,3 +81,6 @@ class Tela(threading.Thread):
         screen.blit(message_seres, ((settings.w-message_seres.get_width()), 0))
         
         pygame.display.flip()
+    
+    def __tempo_desde_start_no_jogo__(self):
+        return ((pygame.time.get_ticks() - self.start_time)/1000)
