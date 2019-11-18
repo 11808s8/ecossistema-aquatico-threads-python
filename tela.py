@@ -27,16 +27,8 @@ class Tela(threading.Thread):
             
             # print('Tela liberada!' + str(self.id))
             
-            events = pygame.event.get()
-            for event in events:
-                if event.type == pygame.QUIT:
-                    utils.finalizou = True 
-
-                    # libera todos os locks
-                    for i in range(len(utils.semaforos)):
-                        # print("liberando " + str(i))
-                        utils.semaforos[i].release()
-                    break
+            Tela.leitura_quit(pygame.event.get(), True)
+            
             
 
             proximo_semaforo = random.randint(0,(len(utils.semaforos)-2))
@@ -61,7 +53,19 @@ class Tela(threading.Thread):
             # print("Chama o próximo: " + str(proximo_semaforo))
             utils.semaforos[proximo_semaforo].release()
             # time.sleep(1)
-            
+
+    @staticmethod    
+    def leitura_quit(events,release_semaforos=False):
+        for event in events:
+            if event.type == pygame.QUIT:
+                utils.finalizou = True 
+
+                if(release_semaforos):
+                    # libera todos os locks
+                    for i in range(len(utils.semaforos)):
+                        # print("liberando " + str(i))
+                        utils.semaforos[i].release()
+                    break
     
     def __exibe_mundo__(self, screen):
         screen.fill(utils.COR_MAR)

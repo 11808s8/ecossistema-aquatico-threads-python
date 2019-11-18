@@ -55,9 +55,10 @@ while True:
 for i,textinput in enumerate(textinputs):
     while True:
         events = pygame.event.get()
-        for event in events:
-            if event.type == pygame.QUIT:
-                quit()
+        Tela.leitura_quit(events)
+        if(utils.finalizou):
+            exit()
+
         if(textinput.update(events)):
             inputs[i] = int(textinput.get_text())
             textinput.clear_text()
