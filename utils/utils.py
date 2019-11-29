@@ -69,6 +69,7 @@ def ser_existe_no_mundo(ser):
     return False
 
 def contador_seres_no_mundo():
+    global mundo
     contador = 0
     
     for x in range(tamanho_matriz):
@@ -139,7 +140,6 @@ def apenas_algas():
 
 def decrementa_calorias(tempo_atual, tempo_antigo):
     global mundo
-    # if((tempo_atual-tempo_antigo)>=1):
     for x in range(tamanho_matriz):
         for y in range(tamanho_matriz):
             if(mundo[x][y] != None):
@@ -147,6 +147,7 @@ def decrementa_calorias(tempo_atual, tempo_antigo):
                     mundo[x][y].sente_fome()
 
 def limpa_mortos_de_fome():
+    global mundo
     for x in range(tamanho_matriz):
         for y in range(tamanho_matriz):
             if(mundo[x][y] != None):
