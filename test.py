@@ -65,7 +65,7 @@ for i,textinput in enumerate(textinputs):
 
 
 alga = utils.carrega_sprite('alga.png')
-tubarao = utils.carrega_sprite('tubarao.png')
+tubarao = utils.carrega_sprite('tubarao_32_32.png')
 # peixe = utils.carrega_sprite('peixe.png')
 foca = utils.carrega_sprite('foca.png')
 # alga = utils.carrega_sprite('peixe_32_32.png')
