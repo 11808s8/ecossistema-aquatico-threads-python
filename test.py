@@ -22,7 +22,7 @@ textinputs = [pygame_textinput.TextInput("","",35,True,(255,255,0)) for i in ran
 
 calorias_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
 screen = pygame.display.set_mode((utils.w, utils.h))
-calorias = 600
+calorias = 600 # valor qualquer. Será sobrescrito abaixo
     
 # Exibe a menssagem na tela
 while True:
@@ -64,12 +64,10 @@ for i,textinput in enumerate(textinputs):
         clock.tick(100)
 
 
-bola = utils.carrega_sprite('bola.png')
 alga = utils.carrega_sprite('alga.png')
 tubarao = utils.carrega_sprite('tubarao.png')
 # peixe = utils.carrega_sprite('peixe.png')
 foca = utils.carrega_sprite('foca.png')
-# bola = utils.carrega_sprite('peixe_32_32.png')
 # alga = utils.carrega_sprite('peixe_32_32.png')
 # tubarao = utils.carrega_sprite('peixe_32_32.png')
 peixe = utils.carrega_sprite('peixe_32_32.png')
@@ -80,7 +78,7 @@ alga = pygame.transform.scale(alga,(utils.tamanho_sprite,utils.tamanho_sprite))
 tubarao = pygame.transform.scale(tubarao,(utils.tamanho_sprite,utils.tamanho_sprite))
 peixe = pygame.transform.scale(peixe,(utils.tamanho_sprite,utils.tamanho_sprite))
 foca = pygame.transform.scale(foca,(utils.tamanho_sprite,utils.tamanho_sprite))
-bola = pygame.transform.scale(bola,(utils.tamanho_sprite,utils.tamanho_sprite))
+
 
 total_seres = 0
 for quantidade_seres in inputs:
