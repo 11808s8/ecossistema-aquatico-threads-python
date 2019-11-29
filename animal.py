@@ -28,6 +28,8 @@ class Animal(Ser):
                 break
         
             direcao = utils.retorna_movimento_valido(self)
+            if(direcao==None):
+                utils.semaforos[(len(utils.semaforos)-1)].release()    
             (x,y) = utils.retorna_coordenada_baseado_em_movimento(self.x,self.y,direcao)
             if(utils.mundo[x][y] != None):
                 # if(utils.mundo[x][y]['tipo_ser'] in self.O_QUE_COMO):
@@ -44,7 +46,7 @@ class Animal(Ser):
 
             print(type(self).__name__ + " " + str(self.id) + " X " + str(self.x) + " Y " + str(self.y))
             utils.semaforos[(len(utils.semaforos)-1)].release()
-            time.sleep(1)        
+
 
     def __str__(self):
         # Printa o nome da classe, calorias e pos(x,y)
@@ -72,6 +74,8 @@ class Animal(Ser):
         Incremento da fome
     '''
     def sente_fome(self):
+        # print("Chamou")
+        # input()
         self.calorias -= self.FOME
     
     def se_alimentou(self):
