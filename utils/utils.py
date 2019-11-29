@@ -16,7 +16,9 @@ h = 480
 
 semaforos = []
 
-FONT = pygame.font.SysFont("Arial", 20)
+FONT_NAME = "Arial"
+FONT = pygame.font.SysFont(FONT_NAME, tamanho_sprite)
+FONT_CALORIAS = pygame.font.SysFont(FONT_NAME, int(tamanho_sprite/3))
 TEXT_COLOR = (255, 255, 0)
 COR_MAR = (9, 150, 185)
 
