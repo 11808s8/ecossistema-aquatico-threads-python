@@ -21,7 +21,7 @@ class Alga(Ser):
                 break
             print(type(self).__name__ + " " + str(self.id))
             utils.semaforos[(len(utils.semaforos)-1)].release()
-            time.sleep(1)
+            # time.sleep(1)
 
     def __str__(self):
         # Printa o nome da classe, calorias e pos(x,y)
