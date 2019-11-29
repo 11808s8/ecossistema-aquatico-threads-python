@@ -93,6 +93,6 @@ class Animal(Ser):
     def exibe(self, screen):
         super().exibe(screen)
         message = 'Calorias: ' + '%i'%(self.calorias)
-        # screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (self.matriz_x[self.x], self.matriz_y[self.y]+self.tamanho_quadrado/2))
-        screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (self.matriz_x[self.x], self.matriz_y[self.y]-20))
+        
+        screen.blit(utils.FONT_CALORIAS.render(message, True, utils.TEXT_COLOR), (self.matriz_x[self.x], self.matriz_y[self.y]-20))
         # screen.blit(self.imagem,(, ))
