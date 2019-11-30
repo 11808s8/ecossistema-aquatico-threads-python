@@ -2,9 +2,10 @@ import random
 from threading import Semaphore
 import pygame
 
-tamanho_matriz = 5
 finalizou = False
-mundo = [[None]*tamanho_matriz for i in range(tamanho_matriz)]
+mundo = None
+
+
 seres = ['alga','tubarao','foca','peixe']
 seres_plural = ['algas','tubarões','focas','peixes']
 direcoes = ['cima', 'baixo', 'esquerda', 'direita']
@@ -16,7 +17,7 @@ w = 640
 h = 480
 
 semaforos = []
-
+tamanho_matriz = 0
 FONT_NAME = "Arial"
 FONT = pygame.font.SysFont(FONT_NAME, 20)
 FONT_CALORIAS = pygame.font.SysFont(FONT_NAME, tamanho_fonte_calorias)
@@ -24,6 +25,16 @@ TEXT_COLOR = (255, 255, 0)
 COR_MAR = (9, 150, 185)
 
 ASSETS = './assets/'
+
+def inicializa_mundo(tam_matriz):
+    global tamanho_matriz
+    tamanho_matriz = tam_matriz
+    global mundo
+    global tamanho_sprite
+    mundo = [[None]*tamanho_matriz for i in range(tamanho_matriz)]
+    if((tamanho_matriz*tamanho_matriz)>25):
+        tamanho_sprite = 48
+    
 
 def carrega_sprite(nome_arquivo_com_extensao):
     caminho = ASSETS + nome_arquivo_com_extensao
