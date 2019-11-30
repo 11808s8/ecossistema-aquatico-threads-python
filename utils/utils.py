@@ -2,14 +2,14 @@ import random
 from threading import Semaphore
 import pygame
 
-tamanho_matriz = 10
+tamanho_matriz = 5
 finalizou = False
 mundo = [[None]*tamanho_matriz for i in range(tamanho_matriz)]
 seres = ['alga','tubarao','foca','peixe']
 seres_plural = ['algas','tubarões','focas','peixes']
 direcoes = ['cima', 'baixo', 'esquerda', 'direita']
 
-tamanho_sprite = 32
+tamanho_sprite = 100
 tamanho_fonte_calorias = 16
 
 w = 640
@@ -186,3 +186,24 @@ def retorna_coordenada_baseado_em_movimento(x,y,movimento):
     elif(movimento=='direita'):
         x+=1
     return (x,y)
+
+
+def single_input_int_com_mensagem(screen,clock,input_surface,mensagem):
+    entrada = 0
+    while True:
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                quit()
+        if(input_surface.update(events)):
+                entrada = int(input_surface.get_text())
+                input_surface.clear_text()
+                break
+        screen.fill((0,0,0))
+        # message = 
+        screen.blit(FONT.render(mensagem, True, TEXT_COLOR), (40,(h/2)))
+        screen.blit(input_surface.get_surface(),(FONT.size(mensagem)[0]+40,(h/2)))
+        pygame.display.flip()
+        clock.tick(100)
+    return entrada
+        

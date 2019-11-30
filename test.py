@@ -21,47 +21,16 @@ inputs = [0 for i in range(len(utils.seres))]
 textinputs = [pygame_textinput.TextInput("","",35,True,(255,255,0)) for i in range(len(inputs))]
 
 calorias_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
+calorias_perde_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
 screen = pygame.display.set_mode((utils.w, utils.h))
-calorias = 600 # valor qualquer. Será sobrescrito abaixo
-    
-# Exibe a menssagem na tela
-while True:
-    events = pygame.event.get()
-    for event in events:
-        if event.type == pygame.QUIT:
-            quit()
-    if(calorias_input.update(events)):
-            calorias = int(calorias_input.get_text())
-            calorias_input.clear_text()
-            break
-    screen.fill((0,0,0))
-    message = 'Digite quantas calorias você quer por animal na simulação:'
-    screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (40,(utils.h/2)))
-    screen.blit(calorias_input.get_surface(),(utils.FONT.size(message)[0]+40,(utils.h/2)))
-    pygame.display.flip()
-    clock.tick(100)
 
-# Lê entradas
+
+calorias = utils.single_input_int_com_mensagem(screen,clock,calorias_input, 'Digite quantas calorias você quer por animal na simulação:')
+calorias_perde = utils.single_input_int_com_mensagem(screen,clock,calorias_perde_input, 'Digite quantas calorias o animal perde a cada N segundos:')
+
+#Lê os bicho
 for i,textinput in enumerate(textinputs):
-    while True:
-        events = pygame.event.get()
-        Tela.leitura_quit(events)
-        if(utils.finalizou):
-            exit()
-
-        if(textinput.update(events)):
-            inputs[i] = int(textinput.get_text())
-            textinput.clear_text()
-            break
-        screen.fill((0,0,0))
-        message = 'Número de %s para a execução da simulação:'%(utils.seres_plural[i])
-        
-        # Exibe a menssagem na tela
-        screen.blit(utils.FONT.render(message, True, utils.TEXT_COLOR), (40,(utils.h/2)))
-        # Exibe input logo após a mensagem na tela
-        screen.blit(textinput.get_surface(),(utils.FONT.size(message)[0]+40,(utils.h/2)))
-        pygame.display.flip()
-        clock.tick(100)
+    inputs[i] = utils.single_input_int_com_mensagem(screen,clock,textinput, 'Número de %s para a execução da simulação:'%(utils.seres_plural[i]))
 
 
 alga = utils.carrega_sprite('alga_32_32-1.png')
