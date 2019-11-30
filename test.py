@@ -17,16 +17,23 @@ pygame.display.set_caption('Ecossistema Aquático')
 clock = pygame.time.Clock()
 
 seres_objetos = []
-inputs = [0 for i in range(len(utils.seres))]
-textinputs = [pygame_textinput.TextInput("","",35,True,(255,255,0)) for i in range(len(inputs))]
 
+# Quantidades de seres na tela
+inputs = [0 for i in range(len(utils.seres))]
+
+# Text Inputs
+textinputs = [pygame_textinput.TextInput("","",35,True,(255,255,0)) for i in range(len(inputs))]
 calorias_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
 calorias_perde_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
+tempo_perder_calorias_input = pygame_textinput.TextInput("","",35,True,(255,255,0))
+
+
 screen = pygame.display.set_mode((utils.w, utils.h))
 
 
 calorias = utils.single_input_int_com_mensagem(screen,clock,calorias_input, 'Digite quantas calorias você quer por animal na simulação:')
 calorias_perde = utils.single_input_int_com_mensagem(screen,clock,calorias_perde_input, 'Digite quantas calorias animal perde/ganha:')
+tempo_perder_calorias = utils.single_input_int_com_mensagem(screen,clock,tempo_perder_calorias_input, 'De quantos em quantos segundos perde caloria:')
 
 #Lê os bicho
 for i,textinput in enumerate(textinputs):
@@ -83,7 +90,7 @@ for chave,quantidade_seres in enumerate(inputs):
 
 start_time = pygame.time.get_ticks()
 
-tela = Tela(ids, screen, start_time)
+tela = Tela(ids, screen, start_time,tempo_perder_calorias)
 
 # Inicialização de threads
 for ser in seres_objetos:

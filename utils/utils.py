@@ -141,7 +141,7 @@ def apenas_algas():
                     return False
     return True
 
-def decrementa_calorias(tempo_atual, tempo_antigo):
+def decrementa_calorias():
     global mundo
     for x in range(tamanho_matriz):
         for y in range(tamanho_matriz):

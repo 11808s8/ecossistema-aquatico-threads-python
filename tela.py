@@ -12,13 +12,14 @@ class Tela(threading.Thread):
        (tem seu semáforo específico na lista de semáforos da aplicação)
     """
 
-    def __init__(self, id, screen, start_time):
+    def __init__(self, id, screen, start_time, tempo_perde_calorias):
         threading.Thread.__init__(self)
         self.id = id
         self.screen = screen
         self.start_time = start_time
-        self.time_since_enter_backup = self.start_time
+        self.time_since_enter_backup = 0
         self.time_since_enter = self.start_time
+        self.tempo_perde_calorias = tempo_perde_calorias
 
     def run(self):
         # global finalizou
@@ -64,8 +65,11 @@ class Tela(threading.Thread):
                     break
     
     def __tratamento_fome_mundo__(self):
-        if((int(self.time_since_enter) - int(self.time_since_enter_backup))>=1):
-            utils.decrementa_calorias(self.time_since_enter, self.time_since_enter_backup)
+
+        # Se o tempo que passou é maior/igual que o tempo necessário para sentir fome, decrementa calorias com base nisso
+        if((int(self.time_since_enter) - int(self.time_since_enter_backup))>=self.tempo_perde_calorias):
+            self.time_since_enter_backup = self.time_since_enter
+            utils.decrementa_calorias()
         utils.limpa_mortos_de_fome()
     
 
@@ -88,7 +92,7 @@ class Tela(threading.Thread):
         pygame.display.flip()
     
     def __atualiza_tempos__(self):
-        self.time_since_enter_backup = self.time_since_enter
+        # self.time_since_enter_backup = self.time_since_enter
         self.time_since_enter = self.__tempo_desde_start_no_jogo__()
 
 
