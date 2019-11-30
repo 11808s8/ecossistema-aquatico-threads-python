@@ -142,34 +142,32 @@ def mundo_vazio():
                 return False
     return True
 
-#@TODO: Quebrar essas 3 funções abaixo em uma ITERA RETORNO que recebe um CALLBACK e devolve o retorno
-def apenas_algas():
+
+# Fiz essa função pra encapsular as outras, que iteravam sobre o mundo com o msm comportamento sem considerar algas
+def iteracao_mundo_strategy(tipo_funcao):
     global mundo
     for x in range(tamanho_matriz):
         for y in range(tamanho_matriz):
             if(mundo[x][y] != None):
                 if(mundo[x][y].o_que_sou() != 'alga'):
-                    return False
-    return True
+                    if(tipo_funcao=='apenas_algas'):
+                        return False
+                    elif(tipo_funcao=='decrementa_calorias'):
+                        mundo[x][y].sente_fome()  
+                    elif(tipo_funcao=='limpa_mortos_de_fome'):
+                        if(mundo[x][y].morreu_de_fome()):
+                            limpa_posicao_especifica(x,y)
+    if(tipo_funcao=='apenas_algas'):
+        return True
+                    
+def apenas_algas():
+    return iteracao_mundo_strategy('apenas_algas')
 
 def decrementa_calorias():
-    global mundo
-    for x in range(tamanho_matriz):
-        for y in range(tamanho_matriz):
-            if(mundo[x][y] != None):
-                if(mundo[x][y].o_que_sou() != 'alga'):
-                    mundo[x][y].sente_fome()
+    iteracao_mundo_strategy('decrementa_calorias')
 
 def limpa_mortos_de_fome():
-    global mundo
-    for x in range(tamanho_matriz):
-        for y in range(tamanho_matriz):
-            if(mundo[x][y] != None):
-                if(mundo[x][y].o_que_sou() != 'alga'):
-                    if(mundo[x][y].morreu_de_fome()):
-                        limpa_posicao_especifica(x,y)
-                        # semaforos[(len(semaforos)-1)].release()
-                        # break
+    iteracao_mundo_strategy('limpa_mortos_de_fome')
 
 def movimento_aleatorio():
     return random.choice(direcoes)
