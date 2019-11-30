@@ -5,11 +5,12 @@ from utils import utils
 
 class Animal(Ser):
     
-    FOME = 100
+    # FOME = 100
 
-    def __init__(self, id,imagem, rect, altura, largura, x=0 ,y=0,calorias=600, O_QUE_COMO = []):
+    def __init__(self, id,imagem, rect, altura, largura, x=0 ,y=0,calorias=600,quanto_perco_calorias=100, O_QUE_COMO = []):
         super().__init__(id,imagem, rect, altura, largura, x ,y)
         self.calorias = calorias
+        self.FOME = quanto_perco_calorias
         self.O_QUE_COMO = O_QUE_COMO
 
 

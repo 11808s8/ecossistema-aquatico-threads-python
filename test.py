@@ -26,7 +26,7 @@ screen = pygame.display.set_mode((utils.w, utils.h))
 
 
 calorias = utils.single_input_int_com_mensagem(screen,clock,calorias_input, 'Digite quantas calorias você quer por animal na simulação:')
-calorias_perde = utils.single_input_int_com_mensagem(screen,clock,calorias_perde_input, 'Digite quantas calorias o animal perde a cada N segundos:')
+calorias_perde = utils.single_input_int_com_mensagem(screen,clock,calorias_perde_input, 'Digite quantas calorias animal perde/ganha:')
 
 #Lê os bicho
 for i,textinput in enumerate(textinputs):
@@ -68,11 +68,11 @@ for chave,quantidade_seres in enumerate(inputs):
         if(utils.seres[chave] == 'alga'):
             novo_ser = Alga(ids,alga,alga.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y)
         elif(utils.seres[chave] == 'peixe'):
-            novo_ser = Peixe(ids,peixe,peixe.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias)
+            novo_ser = Peixe(ids,peixe,peixe.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias,calorias_perde)
         elif(utils.seres[chave] == 'tubarao'):
-            novo_ser = Tubarao(ids,tubarao,tubarao.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias)
+            novo_ser = Tubarao(ids,tubarao,tubarao.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias,calorias_perde)
         elif(utils.seres[chave] == 'foca'):
-            novo_ser = Foca(ids,foca,foca.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias)
+            novo_ser = Foca(ids,foca,foca.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias,calorias_perde)
         # novo_ser.exibe(screen)
         utils.coloca_em_posicao_especifica(novo_ser)
         seres_objetos.append(novo_ser)
