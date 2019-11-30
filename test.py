@@ -64,14 +64,10 @@ for i,textinput in enumerate(textinputs):
         clock.tick(100)
 
 
-alga = utils.carrega_sprite('alga.png')
+alga = utils.carrega_sprite('alga_32_32-1.png')
 tubarao = utils.carrega_sprite('tubarao_32_32.png')
-# peixe = utils.carrega_sprite('peixe.png')
 foca = utils.carrega_sprite('foca.png')
-# alga = utils.carrega_sprite('peixe_32_32.png')
-# tubarao = utils.carrega_sprite('peixe_32_32.png')
 peixe = utils.carrega_sprite('peixe_32_32.png')
-# foca = utils.carrega_sprite('peixe_32_32.png')
 
 
 alga = pygame.transform.scale(alga,(utils.tamanho_sprite,utils.tamanho_sprite))
