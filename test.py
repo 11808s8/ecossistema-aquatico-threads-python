@@ -35,7 +35,7 @@ screen = pygame.display.set_mode((utils.w, utils.h))
 calorias = utils.single_input_int_com_mensagem(screen,clock,calorias_input, 'Digite quantas calorias você quer por animal na simulação:')
 calorias_perde = utils.single_input_int_com_mensagem(screen,clock,calorias_perde_input, 'Digite quantas calorias animal perde/ganha:')
 tempo_perder_calorias = utils.single_input_int_com_mensagem(screen,clock,tempo_perder_calorias_input, 'De quantos em quantos segundos perde caloria:')
-tamanho_matriz = utils.single_input_int_com_mensagem(screen,clock,tamanho_mapa_quadrados_input, 'Quantos quadrados você quer no mapa:')
+tamanho_matriz = utils.single_input_int_com_mensagem(screen,clock,tamanho_mapa_quadrados_input, 'Quadrados por linha (tamanho col == linha):')
 utils.inicializa_mundo(tamanho_matriz)
 
 #Lê os bicho
