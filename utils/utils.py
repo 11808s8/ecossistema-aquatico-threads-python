@@ -18,11 +18,11 @@ h = 480
 
 semaforos = []
 tamanho_matriz = 0
-FONT_NAME = "Arial"
+FONT_NAME = "Ubuntu"
 FONT = pygame.font.SysFont(FONT_NAME, 20)
 FONT_CALORIAS = pygame.font.SysFont(FONT_NAME, tamanho_fonte_calorias)
 TEXT_COLOR = (255, 255, 0)
-COR_MAR = (9, 150, 185)
+COR_MAR = (28, 83, 187) #RGB invertido kkk
 
 ASSETS = './assets/'
 
