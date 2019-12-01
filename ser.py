@@ -3,7 +3,10 @@ import threading
 import time
 
 class Ser(threading.Thread):
-
+    ''' Classe principal de implementação de threads
+        classes de animais e algas herdarão dela
+        e implementarão seus próprios métodos RUN (onde roda a thread quando dá start)
+    '''
     def __init__(self, id,imagem, rect, altura, largura, x=0 ,y=0):
         threading.Thread.__init__(self)
         self.imagem = imagem

@@ -65,9 +65,7 @@ if(total_seres > (utils.tamanho_matriz*utils.tamanho_matriz)):
     exit()
 
 utils.inicializa_semaforos(total_seres)
-print(utils.semaforos)
-# quit()
-# print(seres)
+
 ids=0
 finalizou = False
 for chave,quantidade_seres in enumerate(inputs):
@@ -83,7 +81,6 @@ for chave,quantidade_seres in enumerate(inputs):
             novo_ser = Tubarao(ids,tubarao,tubarao.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias,calorias_perde)
         elif(utils.seres[chave] == 'foca'):
             novo_ser = Foca(ids,foca,foca.get_rect(),utils.tamanho_sprite,utils.tamanho_sprite,x,y,calorias,calorias_perde)
-        # novo_ser.exibe(screen)
         utils.coloca_em_posicao_especifica(novo_ser)
         seres_objetos.append(novo_ser)
         

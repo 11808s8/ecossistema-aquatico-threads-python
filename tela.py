@@ -10,6 +10,7 @@ class Tela(threading.Thread):
        Funciona como extensão do módulo de threading do Python3,
        Implementando um sistema de semáforos.
        (tem seu semáforo específico na lista de semáforos da aplicação)
+       Será sempre o último semáforo na lista de semáforos
     """
 
     def __init__(self, id, screen, start_time, tempo_perde_calorias):

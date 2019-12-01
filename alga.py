@@ -11,17 +11,15 @@ class Alga(Ser):
         while(not utils.finalizou):
             
             utils.semaforos[self.id].acquire()
-            # print("Meu id: " )
-            # print("finalizou " + str(self.id) + " Status: " + str(utils.finalizou))
             if(utils.finalizou):
                 print("finalizou " + str(self.id))
                 break
             if(not utils.ser_existe_no_mundo(self)):
                 utils.semaforos[(len(utils.semaforos)-1)].release()
                 break
-            print(type(self).__name__ + " " + str(self.id))
+            
             utils.semaforos[(len(utils.semaforos)-1)].release()
-            # time.sleep(1)
+            
 
     def __str__(self):
         # Printa o nome da classe, calorias e pos(x,y)

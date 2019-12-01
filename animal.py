@@ -5,8 +5,9 @@ from utils import utils
 
 class Animal(Ser):
     
-    # FOME = 100
-
+    '''Classe que define os principais métodos que os animais específicos
+        herdarão. No método RUN há tudo para a execução da thread do animal
+    '''
     def __init__(self, id,imagem, rect, altura, largura, x=0 ,y=0,calorias=600,quanto_perco_calorias=100, O_QUE_COMO = []):
         super().__init__(id,imagem, rect, altura, largura, x ,y)
         self.calorias = calorias
@@ -17,14 +18,14 @@ class Animal(Ser):
     def run(self):
         while(not utils.finalizou):
             utils.semaforos[self.id].acquire()
-            print("finalizou " + str(self.id) + " Status: " + str(utils.finalizou))
-
-            # @TODO: falta verificar se morri de fome e decrementar fome
             if(utils.finalizou):
                 print("finalizou " + str(self.id))
                 break
 
+            
             if(not utils.ser_existe_no_mundo(self)):
+                # libera o semáforo da tela se o ser já não existe mais
+                # ele será removido na thread TELA
                 utils.semaforos[(len(utils.semaforos)-1)].release()
                 break
         
@@ -33,20 +34,17 @@ class Animal(Ser):
                 utils.semaforos[(len(utils.semaforos)-1)].release()    
             (x,y) = utils.retorna_coordenada_baseado_em_movimento(self.x,self.y,direcao)
             if(utils.mundo[x][y] != None):
-                # if(utils.mundo[x][y]['tipo_ser'] in self.O_QUE_COMO):
+                
                 if(utils.mundo[x][y].o_que_sou() in self.O_QUE_COMO):
                     self.se_alimentou()
-            # else:
-            #     self.sente_fome()
             
             x_antigo = self.x
             y_antigo = self.y 
-            self.movimenta(direcao)
+            self.movimenta(direcao) # define a nova direção.
             utils.coloca_em_posicao_especifica(self)
-            utils.limpa_posicao_especifica(x_antigo, y_antigo)
+            utils.limpa_posicao_especifica(x_antigo, y_antigo) # remove o bicho da matriz lógica
 
-            print(type(self).__name__ + " " + str(self.id) + " X " + str(self.x) + " Y " + str(self.y))
-            utils.semaforos[(len(utils.semaforos)-1)].release()
+            utils.semaforos[(len(utils.semaforos)-1)].release() # libera a thread da tela
 
 
     def __str__(self):
