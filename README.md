@@ -26,6 +26,8 @@ Cada ser no ecossistema funciona em uma thread diferente, com sua sincronia de f
 
 com o Pipenv, só instalar os pacotes do pipenv file e executar ```python3 test.py``` na pasta raíz do projeto.
 
+
+### Sobre
 Trabalho desenvolvido para a disciplina de Programação Concorrente (semestre 4/2019) do curso de Ciência da Computação da Universidade de Caxias do Sul.
 
 Arte dos seres feita pelo autor.<br><br>
