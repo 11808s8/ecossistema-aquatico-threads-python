@@ -2,13 +2,13 @@ from libs import pygame_textinput
 import pygame
 import time
 from random import randrange
-from foca import Foca
-from alga import Alga 
-from tubarao import Tubarao
-from peixe import Peixe
+from objects.foca import Foca
+from objects.alga import Alga
+from objects.tubarao import Tubarao
+from objects.peixe import Peixe
 import random
-from tela import Tela
-from utils import utils
+from objects.tela import Tela
+from objects.utils import utils
 
 pygame.init()
 pygame.display.set_caption('Ecossistema Aquático')
