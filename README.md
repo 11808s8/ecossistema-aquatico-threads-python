@@ -24,7 +24,7 @@ Cada ser no ecossistema funciona em uma thread diferente, com sua sincronia de f
 
 ## Running
 
-com o Pipenv, só instalar os pacotes do pipenv file e executar ```python3 test.py``` na pasta raíz do projeto.
+Com o [Pipenv](https://github.com/pypa/pipenv), só instalar os pacotes do pipenv file e executar ```python3 run.py``` na pasta raíz do projeto.
 
 
 ### Sobre
